@@ -8,7 +8,7 @@ from keep_alive import keep_alive  # This will keep bot alive on Replit
 
 # Load secrets from environment variables
 openai.api_key = os.getenv("OPENAI_API_KEY")
-discord_token = os.getenv("DISCORD_BOT_TOKEN")
+discord_token = os.getenv("discord_token")
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -76,4 +76,8 @@ while True:
     except Exception as e:
         print(f"Error occurred: {e}")
         time.sleep(5)
+
+intents = discord.Intents.default()
+intents.messages = True
+intents.message_content = True
 
