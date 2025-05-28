@@ -8,6 +8,7 @@ from keep_alive import keep_alive  # For Render or Replit
 
 # Load API keys from environment variables
 openai.api_key = os.getenv("OPENAI_API_KEY")
+print("🔑 API KEY loaded:", openai.api_key)
 discord_token = os.getenv("discord_token")
 
 # Set up intents
@@ -43,20 +44,15 @@ def get_ai_reply(user_message):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {
-                    "role": "system",
-                    "content": "Tu ek friendly Discord bot hai jo Hinglish mein baat karta hai. Funny, chill aur thoda witty tone mein reply karta hai."
-                },
-                {
-                    "role": "user",
-                    "content": user_message
-                }
+                {"role": "system", "content": "Tu ek friendly Discord bot hai jo Hinglish mein baat karta hai. Funny, chill aur thoda witty tone mein reply karta hai."},
+                {"role": "user", "content": user_message}
             ]
         )
         return response.choices[0].message.content
     except Exception as e:
-        print(f"❌ OpenAI error: {e}")
+        print("❌ OpenAI ERROR:", e)
         return random.choice(fallback_replies)
+
 
 # When someone sends message
 @bot.event
