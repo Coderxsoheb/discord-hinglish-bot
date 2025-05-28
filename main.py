@@ -141,9 +141,9 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    # If message starts with '!bot', use Gemini API
-    if message.content.lower().startswith("!bot"):
-        prompt = message.content[len("!bot"):].strip() # Remove '!bot' prefix
+    # If message starts with '!', use Gemini API
+    if message.content.lower().startswith("!") and len(message.content) > 1:
+        prompt = message.content[1:].strip() # Remove '!' prefix 
         if not prompt:
             prompt = "Tu kaun hai?" # Default prompt if user just types '!bot'
 
